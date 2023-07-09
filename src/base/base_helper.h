@@ -26,6 +26,10 @@
 #define Member(T,m) (((T*)0)->m)
 #define OffsetOfMember(T,m) IntFromPtr(&Member(T,m))
 
+#define GB(count) (u64) (count * 1024 * 1024 * 1024)
+#define MB(count) (u64) (count * 1024 * 1024)
+#define KB(count) (u64) (count * 1024)
+
 #define Min(a,b) (((a)<(b))?(a):(b))
 #define Max(a,b) (((a)>(b))?(a):(b))
 #define Clamp(a,x,b) (((x)<(a))?(a):((b)<(x))?(b):(x))

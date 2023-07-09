@@ -7,9 +7,7 @@ IF NOT EXIST bin\int mkdir bin\int
 call vcvarsall.bat x64
 SET cc=cl.exe
 
-SET c_filenames= 
-FOR %%f in (src\*.c) do SET c_filenames=!c_filenames! %%f
-FOR %%f in (src\base\*.c) do SET c_filenames=!c_filenames! %%f
+SET c_filenames=src\main.c src\base\base_math.c src\base\base_memory.c
 
 if %cc% == cl.exe (
   SET compiler_flags=/Zc:preprocessor /wd4090 /wd5105
@@ -28,5 +26,6 @@ if %cc% == clang (
 )
 
 ECHO Building codebase.exe...
+ECHO %cc% %compiler_flags% %c_filenames% %defines% %include_flags% %output% %linker_flags%
 %cc% %compiler_flags% %c_filenames% %defines% %include_flags% %output% %linker_flags%
 

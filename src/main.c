@@ -2,7 +2,6 @@
 
 #include "base/base.h"
 
-
 typedef struct TestStruct {
 	int a;
 	int b;
@@ -83,8 +82,36 @@ int main() {
 	EvalPrintF(unlerp(0, 0.3f, 1.f));
 	EvalPrintF(unlerp(10.f, lerp(10.f, 0.5f, 100.f), 100.f));
 
-	EvalPrintB(i2f32_intr_contains(i2f32(20, 20, 200, 200), v2f32(100, 199)));
-	EvalPrintB(i2f32_intr_contains(i2f32(20, 20, 200, 200), v2f32(100, 201)));
-	EvalPrintB(i2f32_intr_contains(i2f32(20, 20, 200, 200), v2f32(19, 199)));
+	u8 backing_buffer[256];
+	arena_allocator a = {0};
+	arena_allocator_init(&a, backing_buffer, 256);
+
+	for(int i = 0; i < 10; i++) {
+		int *x;
+		float *f;
+		char *str;
+
+		// Reset all arena offsets for each loop
+		arena_allocator_free_all(&a);
+
+		x = (int *)arena_allocator_alloc(&a, sizeof(int));
+		f = (float *)arena_allocator_alloc(&a, sizeof(float));
+		str = arena_allocator_alloc(&a, 10);
+
+		*x = 123;
+		*f = 987;
+		memmove(str, "Hellope", 7);
+
+		printf("%p: %d\n", x, *x);
+		printf("%p: %f\n", f, *f);
+		printf("%p: %s\n", str, str);
+
+		str = arena_allocator_resize(&a, str, 10, 16);
+		memmove(str+7, " world!", 7);
+		printf("%p: %s\n", str, str);
+	}
+	
+	arena_allocator_free_all(&a);	
+
 	return 0;
 }
