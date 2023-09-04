@@ -3,17 +3,17 @@
 SetLocal EnabledDelayedExpansion
 IF NOT EXIST bin mkdir bin
 IF NOT EXIST bin\int mkdir bin\int
+IF NOT EXIST bin\windows mkdir bin\windows
 
-call vcvarsall.bat x64
 SET cc=cl.exe
 
-SET c_filenames=src\main.c src\base\base_math.c src\base\base_memory.c
+SET c_filenames=src\main.c
 
 if %cc% == cl.exe (
   SET compiler_flags=/Zc:preprocessor /wd4090 /wd5105
   SET include_flags=/I.\src\ 
   SET linker_flags=/link /DEBUG shell32.lib user32.lib winmm.lib userenv.lib gdi32.lib
-  SET output=/Fe.\bin\codebase /Fo.\bin\int\
+  SET output=/Fe.\bin\windows\codebase /Fo.\bin\int\
   SET defines=/D_DEBUG /D_CRT_SECURE_NO_WARNINGS 
 )
 
