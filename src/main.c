@@ -16,7 +16,10 @@ typedef struct TestStruct {
 #define EvalPrintF(x) printf("%s = %f\n", #x, (f32)(x))
 #define EvalPrintB(x) printf("%s = %s\n", #x, (char*)((x)?"true":"false"))
 
-int main() {
+VECTOR_PROTOTYPE(i32)
+VECTOR_IMPL(i32)
+
+int main(int argc, char **argv) {
 	int foo[100];
 	for(u32 i = 0; i < ArrayCount(foo); i++) {
 		foo[i] = i;
@@ -112,6 +115,17 @@ int main() {
 	}
 	
 	arena_allocator_free_all(&a);	
+
+	i32_vector vec = {0};
+	i32_vector_add(&vec, 10);
+	i32_vector_add(&vec, 20);
+	i32_vector_add(&vec, 30);
+	EvalPrint(vec.elems[0]);
+	EvalPrint(vec.elems[1]);
+	i32_vector_remove(&vec, 1);
+	EvalPrint(vec.elems[0]);
+	EvalPrint(vec.elems[1]);
+	i32_vector_free(&vec);
 
 	return 0;
 }

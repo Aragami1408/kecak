@@ -7,6 +7,8 @@
 #include "base_constants.h"
 #include "base_math.h"
 #include "base_memory.h"
+#include "base_ds.h"
+#include "base_string.h"
 
 #include <stddef.h>
 
