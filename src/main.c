@@ -2,6 +2,8 @@
 
 #include "base/base.h"
 
+#include <complex.h>
+
 typedef struct TestStruct {
 	int a;
 	int b;
@@ -24,6 +26,8 @@ int main(int argc, char **argv) {
 	for(u32 i = 0; i < ArrayCount(foo); i++) {
 		foo[i] = i;
 	}
+
+	double complex z1 = 1.0 + 3.0 * I;
 
 	EvalPrint(ArrayCount(foo));
 

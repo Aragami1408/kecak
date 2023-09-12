@@ -18,12 +18,7 @@ global_variable f64 e_f64 = 2.71828182846;
 global_variable f64 gold_big_f64 = 1.61803398875;
 global_variable f64 gold_small_f64 = 0.61803398875;
 
-// NOTE(higanbana): Symbolic Constants
-typedef enum axis {
-    axis_x,
-    axis_y,
-    axis_z,
-    axis_w,
-} axis;
+#define DEG_TO_RAD 0.0174532925f
+#define RAD_TO_DEG 57.2957795131
 
 #endif
